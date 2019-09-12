@@ -16,7 +16,8 @@ app.use(express.json());
 /*----------------------------*/
 
 /*---------routes----------*/
-app.use('/link', require('./routes/link'));
+app.use('/links', require('./routes/link_routes'));
+app.use('/users', require('./routes/user_routes'));
 /*------------------------*/
 
 /*---------init----------*/
