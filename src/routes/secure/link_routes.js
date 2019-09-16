@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db_pool = require('../mysql');
+const db_pool = require('../../mysql');
 
 router.get('/', async (req, res) => {
     const links = await db_pool.query('SELECT * FROM links;')

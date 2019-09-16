@@ -20,8 +20,8 @@ app.use(passport.session());
 /*----------------------------*/
 
 /*---------routes----------*/
-app.use('/links', require('./routes/link_routes'));
-app.use('/users', require('./routes/user_routes'));
+/*Secure*/
+app.use('/links', passport.authenticate('verify_token', { session: false }), require('./routes/secure/link_routes'));
 app.use(require('./routes/auth_routes'));
 /*------------------------*/
 
