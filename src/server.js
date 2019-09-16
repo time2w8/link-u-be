@@ -22,6 +22,8 @@ app.use(passport.session());
 /*---------routes----------*/
 /*Secure*/
 app.use('/links', passport.authenticate('verify_token', { session: false }), require('./routes/secure/link_routes'));
+app.use('/categories', passport.authenticate('verify_token', { session: false }), require('./routes/secure/category_routes'));
+
 app.use(require('./routes/auth_routes'));
 /*------------------------*/
 

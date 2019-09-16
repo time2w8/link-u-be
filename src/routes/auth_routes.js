@@ -9,6 +9,11 @@ router.post('/signup', passport.authenticate('local_signup', { session: false })
     })
 });
 
+router.get('/logout', function (req, res) {
+    req.logout();
+    res.send('Logged out');
+});
+
 router.post('/login', async (req, res, next) => {
     passport.authenticate('local_login', async (err, user, info) => {
         try {
@@ -16,6 +21,7 @@ router.post('/login', async (req, res, next) => {
                 const error = new Error('An Error occured')
                 return next(error);
             }
+
             req.login(user, { session: false }, async (error) => {
                 if (error) return next(error);
                 const body = {
@@ -25,7 +31,7 @@ router.post('/login', async (req, res, next) => {
                     fname: user.fname,
                     lname: user.lname
                 }
-                const token = jwt.sign({ user: body }, process.env.TOKEN_KEY ||'top_secret');
+                const token = jwt.sign({ user: body }, process.env.TOKEN_KEY || 'top_secret');
                 return res.json(token);
             })
         } catch (error) {
